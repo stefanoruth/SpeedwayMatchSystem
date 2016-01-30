@@ -1,0 +1,60 @@
+@mixin clear {
+	&:after {
+		content: '';
+		clear: both;
+		display: block;
+	}
+}
+
+* {
+	margin: 0px;
+	border: 0px;
+	outline: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+header {
+	display: block;
+	width: 100%;
+	height: 60px;
+	@include clear;
+}
+
+main {
+	display: block;
+	width: 100%;
+	height: calc(100% - 60px);
+	@include clear;
+}
+
+.row {
+	width: 100%;
+	display: block;
+	@include clear;
+}
+
+.content {
+	width: 100%;
+	display: block;
+	max-width: 1180px;
+	margin: 0 auto;
+}
+
+table.race {
+
+	tr {
+
+		th {
+
+		}
+
+		td {
+			
+		}
+	}
+}
