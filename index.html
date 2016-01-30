@@ -4,11 +4,34 @@
 	<meta charset="UTF-8">
 	<title>Speedway Match System</title>
 	<link rel="stylesheet" href="public/app.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.min.js"></script>
-	<script src="public/main.js"></script>
 </head>
 <body id="app">
-	<header></header>
-	<main></main>
+	<header>
+		<div class="content">
+			<div class="title">Speedway Match System</div>
+		</div>
+	</header>
+	<main>
+		<div class="content">
+			<table class="race">
+				<thead>
+					<tr>
+						<th>Heat</th>
+						<th>Lane 1 (red)</th>
+						<th>Lane 2 (blue)</th>
+						<th>Lane 3 (white)</th>
+						<th>Lane 4 (yellow)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="n in heats.length">
+						<td>{{ n+1 }}</td>
+						<td v-for="driver in heats[n]">{{ driver }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+	<script src="public/main.js"></script>
 </body>
 </html>
