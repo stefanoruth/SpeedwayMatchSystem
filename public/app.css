@@ -143,13 +143,15 @@ button {
       .matchSettings .drivers .driver input {
         float: left; }
         .matchSettings .drivers .driver input[name="number"] {
-          width: 50px; }
+          width: 55px;
+          text-align: center; }
         .matchSettings .drivers .driver input[name="group"] {
-          width: 50px; }
+          width: 55px;
+          text-align: center; }
         .matchSettings .drivers .driver input[name="club"] {
           width: 150px; }
         .matchSettings .drivers .driver input[name="name"] {
-          width: calc(100% - 50px - 50px - 150px); }
+          width: calc(100% - 55px - 55px - 150px); }
 
 .preview {
   width: 100%;

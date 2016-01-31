@@ -157,11 +157,13 @@ button {
 				float: left;
 
 				&[name="number"] {
-					width: 50px;
+					width: 55px;
+					text-align: center;
 				}
 
 				&[name="group"] {
-					width: 50px;
+					width: 55px;
+					text-align: center;
 				}
 
 				&[name="club"] {
@@ -169,7 +171,7 @@ button {
 				}
 
 				&[name="name"] {
-					width: calc(100% - 50px - 50px - 150px);
+					width: calc(100% - 55px - 55px - 150px);
 				}
 			}
 		}
