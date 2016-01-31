@@ -69,7 +69,6 @@ module.exports = function () {
 	this.setStartPosition4 = function (heat, driver) {
 		if (this.drivers.length < 7) {
 			var driversMiddle = Math.round(this.drivers.length / 2);
-			console.log(heat, driver, driversMiddle);
 		}
 
 		// Drivers >= 7
@@ -174,7 +173,7 @@ var myApp = new Vue({
 			this.drivers.length = 0;
 
 			for (var i = this.numDrivers - 1; i >= 0; i--) {
-				this.drivers.push(new RaceDriver(i, i + 30, 'Super Køre'));
+				this.drivers.push(new RaceDriver(i, i + 30, 'John Doe', '4A', 'Doe Club'));
 			};
 
 			this.race();

@@ -15,20 +15,29 @@
 		<div class="content">
 			<div class="matchSettings">
 				<div class="settings">
-					<input number v-model="numDrivers" v-on:keyup.enter="setDrivers">
-					<button v-on:click="setDrivers">Update</button>
+					<div class="form-group">
+						<label for="numDrivers">Antal Kører</label>
+						<div class="input-group">
+							<input id="numDrivers" class="form-control" number v-model="numDrivers" v-on:keyup.enter="setDrivers">
+							<span><button v-on:click="setDrivers">Update</button></span>
+						</div>
+					</div>
+					
+					
 					<button v-on:click="shuffleHeats">Shuffle</button>
 					<button onclick="window.print();">Print</button>
 				</div>
 
 				<div class="drivers">
 					<div class="driver" v-for="driver in drivers">
-						<input number value="{{ driver.number }}">
+						<input type="text" name="number" value="{{ driver.number }}" number>
+						<input type="text" name="name" value="{{ driver.name }}">
+						<input type="text" name="group" value="{{ driver.group }}">
+						<input type="text" name="club" value="{{ driver.club }}">
 					</div>
 				</div>
 			</div>
 
-			<div class="matchSettings"><pre>{{ $data.drivers | json }}</pre></div>
 		</div>
 
 		<div class="content">

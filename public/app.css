@@ -58,10 +58,47 @@ main {
     clear: both;
     display: block; }
 
+label {
+  margin-bottom: 5px;
+  display: block; }
+
+input {
+  display: block;
+  padding: 0px 12px;
+  height: 32px;
+  line-height: 32px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #55595c;
+  font-size: 16px; }
+  input.form-control {
+    width: 100%; }
+
+button {
+  height: 32px;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  cursor: pointer; }
+
+.form-group {
+  margin-bottom: 15px;
+  display: block; }
+  .form-group .input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    width: 100%; }
+    .form-group .input-group input {
+      display: table-cell; }
+    .form-group .input-group span {
+      display: table-cell;
+      vertical-align: middle;
+      width: 1%; }
+
 .matchSettings {
   padding-bottom: 50px;
   border-bottom: 1px solid #d4d4d4;
-  margin-bottom: 50px;
+  margin: 50px 0px;
   width: 100%;
   display: block; }
   .matchSettings:after {
@@ -69,21 +106,33 @@ main {
     clear: both;
     display: block; }
   .matchSettings .settings {
-    width: 50%;
+    width: calc(99.99% * 5/12 - 17.5px);
     float: left;
+    margin-right: 30px;
+    clear: none;
     display: block; }
     .matchSettings .settings:after {
       content: '';
       clear: both;
       display: block; }
+    .matchSettings .settings:last-child, .matchSettings .settings:nth-child(12n) {
+      margin-right: 0px; }
+    .matchSettings .settings:nth-child(12n+1) {
+      clear: left; }
   .matchSettings .drivers {
-    width: 50%;
+    width: calc(99.99% * 7/12 - 12.5px);
     float: left;
+    margin-right: 30px;
+    clear: none;
     display: block; }
     .matchSettings .drivers:after {
       content: '';
       clear: both;
       display: block; }
+    .matchSettings .drivers:last-child, .matchSettings .drivers:nth-child(12n) {
+      margin-right: 0px; }
+    .matchSettings .drivers:nth-child(12n+1) {
+      clear: left; }
     .matchSettings .drivers .driver {
       width: 100%;
       display: block; }
@@ -91,10 +140,16 @@ main {
         content: '';
         clear: both;
         display: block; }
-      .matchSettings .drivers .driver input[name="number"] {
-        width: 50px; }
-      .matchSettings .drivers .driver input[name="group"] {
-        width: 50px; }
+      .matchSettings .drivers .driver input {
+        float: left; }
+        .matchSettings .drivers .driver input[name="number"] {
+          width: 50px; }
+        .matchSettings .drivers .driver input[name="group"] {
+          width: 50px; }
+        .matchSettings .drivers .driver input[name="club"] {
+          width: 150px; }
+        .matchSettings .drivers .driver input[name="name"] {
+          width: calc(100% - 50px - 50px - 150px); }
 
 .preview {
   width: 100%;
