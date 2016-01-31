@@ -2,27 +2,28 @@ var RaceMatch = require('./lib/RaceMatch.js');
 var RaceDriver = require('./lib/RaceDriver.js');
 var Vue = require('vue');
 
+Vue.config.debug = false;
+
 var myApp = new Vue({
 
 	el: '#app',
 
 	data: {
 		heats: [],
+		numDrivers: 8,
+		drivers: [],
 	},
 
 	ready: function() {
-		this.calcRace();
-
-		this.shuffleHeats();
+		this.setDrivers();
+		this.race();
 	},
 
 	methods: {
 
-		calcRace: function() {
+		race: function() {
 			var race = new RaceMatch()
-			this.heats = race.setDrivers(12).race();
-
-			
+			this.heats = race.setDrivers(this.numDrivers).race();
 		},
 
 		shuffleHeats: function(){
@@ -31,7 +32,24 @@ var myApp = new Vue({
 				return o;
 			};
 
-			this.heats = Shuffle(this.heats);
+			Shuffle(this.heats);
+			this.heats.push(new RaceDriver());
+			this.heats.pop();
+			console.log('shuffle');
 		},
+
+		setDrivers: function() {
+			this.drivers.length = 0;
+
+			for (var i = this.numDrivers - 1; i >= 0; i--) {
+				this.drivers.push(new RaceDriver(i, i+30, 'Super Køre'));
+			};
+
+			this.race();
+		},
+
+		updateDriver: function(driverId) {
+
+		}
 	},
 });

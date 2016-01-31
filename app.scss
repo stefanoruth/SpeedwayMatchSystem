@@ -1,8 +1,18 @@
+$mainColor: #2e3e4e;
+$lightTextColor: rgba(255, 255, 255, 0.9);
+$borderColor: #d4d4d4;
+
 @mixin clear {
 	&:after {
 		content: '';
 		clear: both;
 		display: block;
+	}
+}
+
+@mixin print {
+	@media print {
+		@content;
 	}
 }
 
@@ -18,7 +28,8 @@ html, body {
 	height: 100%;
 	font-size: 16px;
 	font-weight: 400;
-	color: #333;
+	color: #000;
+	background-color: #f0f0f0;
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -26,7 +37,8 @@ header {
 	display: block;
 	width: 100%;
 	height: 60px;
-	background-color: #dedede;
+	background-color: $mainColor;
+	color: $lightTextColor;
 	@include clear;
 
 	.title {
@@ -41,7 +53,7 @@ header {
 main {
 	display: block;
 	width: 100%;
-	height: calc(100% - 60px);
+	margin-bottom: 100px;
 	@include clear;
 }
 
@@ -54,39 +66,127 @@ main {
 .content {
 	width: 100%;
 	display: block;
-	max-width: 1000px;
+	max-width: 1020px;
 	margin: 0 auto;
-	padding: 0px 10px;
+	padding: 0px 20px;
 	@include clear;
 }
 
-table.race {
-	width: 400px;
-	table-layout: fixed;
-	border-collapse: collapse;
+.matchSettings {
+	padding-bottom: 50px;
+	border-bottom: 1px solid $borderColor;
+	margin-bottom: 50px;
+	width: 100%;
+	display: block;
+	@include clear;
 
-	thead tr {
+	.settings {
+		width: 50%;
+		float: left;
+		display: block;
+		@include clear;
+	}
 
-		th {
-			text-align: center;
-			border: 1px solid #000;
-			font-weight: 700;
+	.drivers {
+		width: 50%;
+		float: left;
+		display: block;
+		@include clear;
 
-			&:first-child {
-				width: 70px;
+
+		.driver {
+			width: 100%;
+			display: block;
+			@include clear;
+
+			input[name="number"] {
+				width: 50px;
+			}
+
+			input[name="group"] {
+				width: 50px;
 			}
 		}
 	}
+}
 
-	tbody tr {
-		
-		td {
-			text-align: center;
-			border: 1px solid #000;
+.preview {
+	width: 100%;
+	display: block;
+	@include clear;
 
-			&:first-child {
+	table.race, table.drivers {
+		table-layout: fixed;
+		border-collapse: collapse;
+		background-color: #fff;
+		float: left;
+
+		&.race {
+			width: 400px;
+			margin-right: 10px;
+		}
+
+		&.drivers {
+			width: calc(100% - 410px);
+		}
+
+		thead tr {
+
+			th {
+				text-align: center;
+				border: 1px solid $borderColor;
 				font-weight: 700;
+				height: 40px;
+
+				&:first-child {
+					width: 70px;
+				}
 			}
 		}
+
+		tbody tr {
+			
+			td {
+				text-align: center;
+				border: 1px solid $borderColor;
+
+				&:first-child {
+					font-weight: 700;
+				}
+			}
+		}
+	}
+}
+
+
+@include print {
+	.matchSettings, header {
+		display: none;
+	}
+
+	
+
+	html, body {
+		font-size: 10px;
+	}
+
+	.preview {
+		
+		table {
+			table-layout: auto;
+			
+			&.race {
+				width: auto;
+				max-width: 30%;
+			}
+
+			&.drivers {
+				width: auto;
+			}
+
+			th, td {
+				border: 1px solid #000;
+			}
+		}		
 	}
 }
