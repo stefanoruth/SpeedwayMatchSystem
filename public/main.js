@@ -1,16 +1,18 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
-function RaceDriver(name, driverNumber) {
-	this.id = null;
-	this.name = name;
-	this.driverNumber = driverNumber;
-}
+module.exports = function (id, number, name, group, club) {
+	this.id = id = typeof id !== 'undefined' ? id : null;
+	this.number = number = typeof number !== 'undefined' ? number : null;
+	this.name = name = typeof name !== 'undefined' ? name : null;
+	this.group = group = typeof group !== 'undefined' ? group : null;
+	this.club = club = typeof club !== 'undefined' ? club : null;
+};
 
 },{}],2:[function(require,module,exports){
 'use strict';
 
-var match = function match() {
+module.exports = function () {
 	this.title = 'Speedway';
 	this.drivers = [];
 	this.lanes = 4;
@@ -125,8 +127,6 @@ var match = function match() {
  }*/
 };
 
-module.exports = match;
-
 },{}],3:[function(require,module,exports){
 'use strict';
 
@@ -134,25 +134,28 @@ var RaceMatch = require('./lib/RaceMatch.js');
 var RaceDriver = require('./lib/RaceDriver.js');
 var Vue = require('vue');
 
+Vue.config.debug = false;
+
 var myApp = new Vue({
 
 	el: '#app',
 
 	data: {
-		heats: []
+		heats: [],
+		numDrivers: 8,
+		drivers: []
 	},
 
 	ready: function ready() {
-		this.calcRace();
-
-		this.shuffleHeats();
+		this.setDrivers();
+		this.race();
 	},
 
 	methods: {
 
-		calcRace: function calcRace() {
+		race: function race() {
 			var race = new RaceMatch();
-			this.heats = race.setDrivers(12).race();
+			this.heats = race.setDrivers(this.numDrivers).race();
 		},
 
 		shuffleHeats: function shuffleHeats() {
@@ -161,8 +164,23 @@ var myApp = new Vue({
 				return o;
 			};
 
-			this.heats = Shuffle(this.heats);
-		}
+			Shuffle(this.heats);
+			this.heats.push(new RaceDriver());
+			this.heats.pop();
+			console.log('shuffle');
+		},
+
+		setDrivers: function setDrivers() {
+			this.drivers.length = 0;
+
+			for (var i = this.numDrivers - 1; i >= 0; i--) {
+				this.drivers.push(new RaceDriver(i, i + 30, 'Super Køre'));
+			};
+
+			this.race();
+		},
+
+		updateDriver: function updateDriver(driverId) {}
 	}
 });
 
