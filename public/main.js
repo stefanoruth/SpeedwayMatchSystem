@@ -140,8 +140,8 @@ var myApp = new Vue({
 	el: '#app',
 
 	data: {
-		heats: [],
 		numDrivers: 8,
+		heats: [],
 		drivers: []
 	},
 
@@ -164,8 +164,7 @@ var myApp = new Vue({
 			};
 
 			Shuffle(this.heats);
-			this.heats.push(new RaceDriver());
-			this.heats.pop();
+			this.heats.__ob__.dep.notify();
 			console.log('shuffle');
 		},
 
@@ -177,6 +176,11 @@ var myApp = new Vue({
 			};
 
 			this.race();
+		},
+
+		resetDrivers: function resetDrivers() {
+			this.drivers.length = 0;
+			console.log(this.drivers.__ob__.dep.notify());
 		},
 
 		updateDriver: function updateDriver(driverId) {}

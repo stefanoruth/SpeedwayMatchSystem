@@ -3,13 +3,8 @@ var chai = require('chai');
 var RaceMatch = require('../lib/RaceMatch.js');
 
 describe('Demo Race', function(){
-	it('a race object', function(){
-		var match = new RaceMatch();
-		expect(match.title).to.be.a('string');
-		expect(match.title).to.equal('Speedway');
-	});
 
-	it('checks the number of drivers', function(){
+	it('checks the amount of drivers in a 4 persons race', function(){
 		var match = new RaceMatch();
 		match.setDrivers(4);
 

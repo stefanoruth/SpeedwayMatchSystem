@@ -9,15 +9,15 @@ html, body {
   height: 100%;
   font-size: 16px;
   font-weight: 400;
-  color: #000;
-  background-color: #f0f0f0;
+  color: #23282e;
+  background-color: #f4f5f9;
   font-family: 'Open Sans', sans-serif; }
 
 header {
   display: block;
   width: 100%;
   height: 60px;
-  background-color: #2e3e4e;
+  background-color: #1699dd;
   color: rgba(255, 255, 255, 0.9); }
   header:after {
     content: '';
@@ -33,7 +33,8 @@ header {
 main {
   display: block;
   width: 100%;
-  margin-bottom: 100px; }
+  margin-bottom: 100px;
+  padding-top: 50px; }
   main:after {
     content: '';
     clear: both;
@@ -50,7 +51,7 @@ main {
 .content {
   width: 100%;
   display: block;
-  max-width: 1020px;
+  max-width: 1220px;
   margin: 0 auto;
   padding: 0px 20px; }
   .content:after {
@@ -98,7 +99,6 @@ button {
 .matchSettings {
   padding-bottom: 50px;
   border-bottom: 1px solid #d4d4d4;
-  margin: 50px 0px;
   width: 100%;
   display: block; }
   .matchSettings:after {

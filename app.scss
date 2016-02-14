@@ -1,3 +1,7 @@
+$mainColor: #1699dd;
+$backgroundColor: #f4f5f9;
+$cardColor: #fff;
+$textColor: #23282e;
 $borderColor: #d4d4d4;
 
 @mixin clear {
@@ -38,8 +42,8 @@ html, body {
 	height: 100%;
 	font-size: 16px;
 	font-weight: 400;
-	color: #000;
-	background-color: #f0f0f0;
+	color: $textColor;
+	background-color: $backgroundColor;
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -47,7 +51,7 @@ header {
 	display: block;
 	width: 100%;
 	height: 60px;
-	background-color: #2e3e4e;
+	background-color: $mainColor;
 	color: rgba(255, 255, 255, 0.9);
 	@include clear;
 
@@ -64,6 +68,7 @@ main {
 	display: block;
 	width: 100%;
 	margin-bottom: 100px;
+	padding-top: 50px;
 	@include clear;
 }
 
@@ -76,7 +81,7 @@ main {
 .content {
 	width: 100%;
 	display: block;
-	max-width: 1020px;
+	max-width: 1220px;
 	margin: 0 auto;
 	padding: 0px 20px;
 	@include clear;
@@ -131,10 +136,20 @@ button {
 	}
 }
 
+.card {
+
+	.header {
+		
+
+		.title {
+
+		}
+	}
+}
+
 .matchSettings {
 	padding-bottom: 50px;
 	border-bottom: 1px solid $borderColor;
-	margin: 50px 0px;
 	width: 100%;
 	display: block;
 	@include clear;

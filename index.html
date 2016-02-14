@@ -26,6 +26,7 @@
 					
 					<button v-on:click="shuffleHeats">Shuffle</button>
 					<button onclick="window.print();">Print</button>
+					<button v-on:click="resetDrivers">Reset Drivers</button>
 				</div>
 
 				<div class="drivers">
@@ -40,56 +41,57 @@
 
 		</div>
 
-		<div class="content">
-			<div class="preview">
-				<table class="race">
-					<thead>
-						<tr>
-							<th>Heat</th>
-							<th>Lane 1 (red)</th>
-							<th>Lane 2 (blue)</th>
-							<th>Lane 3 (white)</th>
-							<th>Lane 4 (yellow)</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="heat in heats">
-							<td>{{ $index+1 }}</td>
-							<td v-for="driver in heats[$index]">{{ driver }}</td>
-						</tr>
-					</tbody>
-				</table>
-				<table class="drivers">
-					<thead>
-						<tr>
-							<th>Nr.</th>
-							<th>Navn</th>
-							<th>Klasse</th>
-							<th>Klub</th>
-							<th>1</th>
-							<th>2</th>
-							<th>3</th>
-							<th>4</th>
-							<th>ialt</th>
-							<th>plac.</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="driver in drivers">
-							<td>{{ driver.number }}</td>
-							<td>{{ driver.name }}</td>
-							<td>{{ driver.group }}</td>
-							<td>{{ driver.club }}</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		<div class="content preview">
+			<table class="race">
+				<thead>
+					<tr>
+						<th>Heat</th>
+						<th>Lane 1 (red)</th>
+						<th>Lane 2 (blue)</th>
+						<th>Lane 3 (white)</th>
+						<th>Lane 4 (yellow)</th>
+						<th>Results</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="heat in heats">
+						<td>{{ $index+1 }}</td>
+						<td v-for="driver in heats[$index]">{{ driver }}</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<table class="drivers">
+				<thead>
+					<tr>
+						<th>Nr.</th>
+						<th>Navn</th>
+						<th>Klasse</th>
+						<th>Klub</th>
+						<th>1</th>
+						<th>2</th>
+						<th>3</th>
+						<th>4</th>
+						<th>ialt</th>
+						<th>plac.</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="driver in drivers">
+						<td>{{ driver.number }}</td>
+						<td>{{ driver.name }}</td>
+						<td>{{ driver.group }}</td>
+						<td>{{ driver.club }}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</main>
 	<script src="public/main.js"></script>
