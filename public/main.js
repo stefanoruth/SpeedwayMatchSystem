@@ -67,63 +67,27 @@ module.exports = function () {
 	};
 
 	this.setStartPosition4 = function (heat, driver) {
-		if (this.drivers.length < 7) {
-			var driversMiddle = Math.round(this.drivers.length / 2);
+		if (this.drivers.length <= 5 && this.calcPositionOffset(heat, driver, 2)) {
+			return true;
 		}
-
-		// Drivers >= 7
-		else if (this.drivers.length >= 7 && (driver + 6 == heat || heat <= 6 && this.drivers.length - 6 + heat == driver)) {
+		// Drivers == 6
+		else if (this.drivers.length == 6 && this.calcPositionOffset(heat, driver, 5)) {
 				return true;
 			}
+
+			// Drivers >= 7
+			else if (this.drivers.length >= 7 && this.calcPositionOffset(heat, driver, 6)) {
+					return true;
+				}
 		return false;
 	};
 
-	/*this.setStartPosition4 = function(heat, driver) {
- 	// Drivers 4
- 	if (this.drivers.length == 4) {
- 		//console.log(this.drivers.length / 2, heat, (Math.round(this.drivers.length / 2) + heat <= this.drivers.length), Math.abs(this.drivers.length  - (Math.round(this.drivers.length / 2) + heat)) == driver);
- 		if (Math.round(this.drivers.length / 2) + heat <= this.drivers.length) {
- 			return true;
- 		} else if (Math.abs(this.drivers.length  - (Math.round(this.drivers.length / 2) + heat)) == driver) {
- 			return true;
- 		}
- 	}
- 
- 	// Drivers 5
- 	else if (this.drivers.length == 5) {
- 		if (Math.round(this.drivers.length / 2) + heat <= this.drivers.length) {
- 			return true;
- 		} else if (Math.abs(this.drivers.length  - (Math.round(this.drivers.length / 2) + heat)) == driver) {
- 			return true;
- 		}
- 	}
- 
- 	// Drivers 6
- 	else if (this.drivers.length == 6) {
- 		if (heat + 1 == driver) {
- 			return true;
- 		} else if (this.drivers.length - heat + 1 == driver) {
- 			return true;
- 		}
- 	
- 	}
- 
- 	// Drivers 7
- 	else if (this.drivers.length == 7 && (this.drivers.length-6+heat) == driver) {
- 		return true;
- 	
- 	}
- 
- 	// Drivers > 7
- 	else {
- 		if (driver + 6 == heat) {
- 			return true;
- 		} else if (heat <= 5 && (((this.drivers.length - 6 + heat) == driver) || (driver - 1 == heat))) {
- 			return true;
- 		}
- 	}
- 	return false;
- }*/
+	this.calcPositionOffset = function (heat, driver, offset) {
+		if (driver + offset == heat || heat <= offset && this.drivers.length - offset + heat == driver) {
+			return true;
+		}
+		return false;
+	};
 };
 
 },{}],3:[function(require,module,exports){
