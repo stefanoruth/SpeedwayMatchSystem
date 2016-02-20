@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var chai = require('chai');
 var RaceMatch = require('../lib/RaceMatch.js');
 
-describe('Demo Race', function(){
+describe('Speedway Test Race', function(){
 
 	it('checks the amount of drivers in a 4 persons race', function(){
 		var match = new RaceMatch();
