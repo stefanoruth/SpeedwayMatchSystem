@@ -30,6 +30,13 @@ $borderColor: #d4d4d4;
 	}
 }
 
+@mixin row {
+	width: 100%;
+	display: block;
+	margin-bottom: 50px;
+	@include clear;
+}
+
 * {
 	margin: 0px;
 	border: 0px;
@@ -83,6 +90,14 @@ main {
 	display: block;
 	max-width: 1220px;
 	margin: 0 auto;
+	padding: 0px 20px;
+	@include clear;
+}
+
+.split {
+	width: 50%;
+	display: block;
+	float: left;
 	padding: 0px 20px;
 	@include clear;
 }
@@ -148,20 +163,14 @@ button {
 }
 
 .matchSettings {
-	padding-bottom: 50px;
-	border-bottom: 1px solid $borderColor;
-	width: 100%;
-	display: block;
-	@include clear;
-
-
+	@include row;
 
 	.settings {
-		@include column(5, 12, 30px);
+		@include row;
 	}
 
 	.drivers {
-		@include column(7, 12, 30px);
+		@include row;
 
 		.driver {
 			width: 100%;
@@ -194,24 +203,14 @@ button {
 }
 
 .preview {
-	width: 100%;
-	display: block;
-	@include clear;
+	@include row;
 
 	table.race, table.drivers {
 		table-layout: fixed;
 		border-collapse: collapse;
 		background-color: #fff;
-		float: left;
-
-		&.race {
-			width: 400px;
-			margin-right: 10px;
-		}
-
-		&.drivers {
-			width: calc(100% - 410px);
-		}
+		width: 100%;
+		margin-bottom: 50px;
 
 		thead tr {
 
@@ -241,35 +240,6 @@ button {
 	}
 }
 
-
 @media print {
-	.matchSettings, header {
-		display: none;
-	}
-
-	
-
-	html, body {
-		font-size: 10px;
-	}
-
-	.preview {
-		
-		table {
-			table-layout: auto;
-			
-			&.race {
-				width: auto;
-				max-width: 30%;
-			}
-
-			&.drivers {
-				width: auto;
-			}
-
-			th, td {
-				border: 1px solid #000;
-			}
-		}		
-	}
+	// Reset Design
 }

@@ -60,7 +60,7 @@ module.exports = function () {
 	};
 
 	this.setStartPosition3 = function (heat, driver) {
-		if (driver + 3 == heat || heat <= 3 && this.drivers.length - 3 + heat == driver) {
+		if (this.calcPositionOffset(heat, driver, 3)) {
 			return true;
 		}
 		return false;

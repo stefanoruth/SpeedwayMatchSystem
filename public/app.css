@@ -59,6 +59,16 @@ main {
     clear: both;
     display: block; }
 
+.split {
+  width: 50%;
+  display: block;
+  float: left;
+  padding: 0px 20px; }
+  .split:after {
+    content: '';
+    clear: both;
+    display: block; }
+
 label {
   margin-bottom: 5px;
   display: block; }
@@ -97,42 +107,29 @@ button {
       width: 1%; }
 
 .matchSettings {
-  padding-bottom: 50px;
-  border-bottom: 1px solid #d4d4d4;
   width: 100%;
-  display: block; }
+  display: block;
+  margin-bottom: 50px; }
   .matchSettings:after {
     content: '';
     clear: both;
     display: block; }
   .matchSettings .settings {
-    width: calc(99.99% * 5/12 - 17.5px);
-    float: left;
-    margin-right: 30px;
-    clear: none;
-    display: block; }
+    width: 100%;
+    display: block;
+    margin-bottom: 50px; }
     .matchSettings .settings:after {
       content: '';
       clear: both;
       display: block; }
-    .matchSettings .settings:last-child, .matchSettings .settings:nth-child(12n) {
-      margin-right: 0px; }
-    .matchSettings .settings:nth-child(12n+1) {
-      clear: left; }
   .matchSettings .drivers {
-    width: calc(99.99% * 7/12 - 12.5px);
-    float: left;
-    margin-right: 30px;
-    clear: none;
-    display: block; }
+    width: 100%;
+    display: block;
+    margin-bottom: 50px; }
     .matchSettings .drivers:after {
       content: '';
       clear: both;
       display: block; }
-    .matchSettings .drivers:last-child, .matchSettings .drivers:nth-child(12n) {
-      margin-right: 0px; }
-    .matchSettings .drivers:nth-child(12n+1) {
-      clear: left; }
     .matchSettings .drivers .driver {
       width: 100%;
       display: block; }
@@ -155,7 +152,8 @@ button {
 
 .preview {
   width: 100%;
-  display: block; }
+  display: block;
+  margin-bottom: 50px; }
   .preview:after {
     content: '';
     clear: both;
@@ -164,12 +162,8 @@ button {
     table-layout: fixed;
     border-collapse: collapse;
     background-color: #fff;
-    float: left; }
-    .preview table.race.race, .preview table.drivers.race {
-      width: 400px;
-      margin-right: 10px; }
-    .preview table.race.drivers, .preview table.drivers.drivers {
-      width: calc(100% - 410px); }
+    width: 100%;
+    margin-bottom: 50px; }
     .preview table.race thead tr th, .preview table.drivers thead tr th {
       text-align: center;
       border: 1px solid #d4d4d4;
@@ -182,18 +176,3 @@ button {
       border: 1px solid #d4d4d4; }
       .preview table.race tbody tr td:first-child, .preview table.drivers tbody tr td:first-child {
         font-weight: 700; }
-
-@media print {
-  .matchSettings, header {
-    display: none; }
-  html, body {
-    font-size: 10px; }
-  .preview table {
-    table-layout: auto; }
-    .preview table.race {
-      width: auto;
-      max-width: 30%; }
-    .preview table.drivers {
-      width: auto; }
-    .preview table th, .preview table td {
-      border: 1px solid #000; } }
