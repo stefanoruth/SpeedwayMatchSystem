@@ -2,7 +2,7 @@ var RaceMatch = require('./lib/RaceMatch.js');
 var RaceDriver = require('./lib/RaceDriver.js');
 var Vue = require('vue');
 
-Vue.config.debug = false;
+Vue.config.debug = true;
 
 var myApp = new Vue({
 
@@ -17,6 +17,7 @@ var myApp = new Vue({
 	ready: function() {
 		this.setDrivers();
 		this.race();
+		console.log(this.heats);
 	},
 
 	methods: {
@@ -41,7 +42,7 @@ var myApp = new Vue({
 			this.drivers.length = 0;
 
 			for (var i = this.numDrivers - 1; i >= 0; i--) {
-				this.drivers.push(new RaceDriver(i, i+30, 'John Doe', '4A', 'Doe Club'));
+				this.drivers.push(new RaceDriver());
 			};
 
 			this.race();
@@ -53,8 +54,11 @@ var myApp = new Vue({
 			console.log(this.drivers.__ob__.dep.notify());
 		},
 
-		updateDriver: function(driverId) {
-
-		}
+		getDriverNumber: function(id) {
+			if (this.drivers[id-1]) {
+				return this.drivers[id-1].number;
+			}
+			return;
+		},
 	},
 });

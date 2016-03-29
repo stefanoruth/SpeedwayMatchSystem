@@ -91,6 +91,30 @@ button {
   border: 1px solid #ccc;
   cursor: pointer; }
 
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: #fff;
+  width: 100%;
+  margin-bottom: 50px; }
+  table thead th {
+    text-align: center;
+    border: 1px solid #d4d4d4;
+    font-weight: 700;
+    height: 40px; }
+    table thead th.number {
+      width: 70px; }
+  table tbody td {
+    text-align: center;
+    border: 1px solid #d4d4d4; }
+    table tbody td.number {
+      font-weight: 700; }
+      table tbody td.number input {
+        text-align: center; }
+    table tbody td input {
+      width: 100%;
+      border: none; }
+
 .form-group {
   margin-bottom: 15px;
   display: block; }
@@ -122,33 +146,6 @@ button {
       content: '';
       clear: both;
       display: block; }
-  .matchSettings .drivers {
-    width: 100%;
-    display: block;
-    margin-bottom: 50px; }
-    .matchSettings .drivers:after {
-      content: '';
-      clear: both;
-      display: block; }
-    .matchSettings .drivers .driver {
-      width: 100%;
-      display: block; }
-      .matchSettings .drivers .driver:after {
-        content: '';
-        clear: both;
-        display: block; }
-      .matchSettings .drivers .driver input {
-        float: left; }
-        .matchSettings .drivers .driver input[name="number"] {
-          width: 55px;
-          text-align: center; }
-        .matchSettings .drivers .driver input[name="group"] {
-          width: 55px;
-          text-align: center; }
-        .matchSettings .drivers .driver input[name="club"] {
-          width: 150px; }
-        .matchSettings .drivers .driver input[name="name"] {
-          width: calc(100% - 55px - 55px - 150px); }
 
 .preview {
   width: 100%;
@@ -158,21 +155,3 @@ button {
     content: '';
     clear: both;
     display: block; }
-  .preview table.race, .preview table.drivers {
-    table-layout: fixed;
-    border-collapse: collapse;
-    background-color: #fff;
-    width: 100%;
-    margin-bottom: 50px; }
-    .preview table.race thead tr th, .preview table.drivers thead tr th {
-      text-align: center;
-      border: 1px solid #d4d4d4;
-      font-weight: 700;
-      height: 40px; }
-      .preview table.race thead tr th:first-child, .preview table.drivers thead tr th:first-child {
-        width: 70px; }
-    .preview table.race tbody tr td, .preview table.drivers tbody tr td {
-      text-align: center;
-      border: 1px solid #d4d4d4; }
-      .preview table.race tbody tr td:first-child, .preview table.drivers tbody tr td:first-child {
-        font-weight: 700; }

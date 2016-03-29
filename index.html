@@ -29,12 +29,24 @@
 				</div>
 
 				<div class="drivers">
-					<div class="driver" v-for="driver in drivers">
-						<input type="text" name="number" value="{{ driver.number }}" number>
-						<input type="text" name="name" value="{{ driver.name }}">
-						<input type="text" name="group" value="{{ driver.group }}">
-						<input type="text" name="club" value="{{ driver.club }}">
-					</div>
+					<table>
+						<thead>
+							<tr>
+								<th class="number">Nr.</th>
+								<th>Navn</th>
+								<th>Klasse</th>
+								<th>Klub</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="driver" v-for="driver in drivers">
+								<td class="number"><input v-model="driver.number"></td>
+								<td class="name"><input v-model="driver.name"></td>
+								<td class="group"><input v-model="driver.group"></td>
+								<td class="club"><input v-model="driver.club"></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 
@@ -45,7 +57,7 @@
 				<table class="race">
 					<thead>
 						<tr>
-							<th>Heat</th>
+							<th class="number">Heat</th>
 							<th>Lane 1<br>(red)</th>
 							<th>Lane 2<br>(blue)</th>
 							<th>Lane 3<br>(white)</th>
@@ -55,8 +67,8 @@
 					</thead>
 					<tbody>
 						<tr v-for="heat in heats">
-							<td>{{ $index+1 }}</td>
-							<td v-for="driver in heats[$index]">{{ driver }}</td>
+							<td class="number">{{ $index+1 }}</td>
+							<td v-for="driver in heats[$index]">{{ getDriverNumber(driver) }}</td>
 							<td></td>
 						</tr>
 					</tbody>
@@ -65,7 +77,7 @@
 				<table class="drivers">
 					<thead>
 						<tr>
-							<th>Nr.</th>
+							<th class="number">Nr.</th>
 							<th>Navn</th>
 							<th>Klasse</th>
 							<th>Klub</th>
@@ -78,8 +90,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="driver in drivers">
-							<td>{{ driver.number }}</td>
+						<tr v-for="driver in drivers" v-if="driver.isset()">
+							<td class="number">{{ driver.number }}</td>
 							<td>{{ driver.name }}</td>
 							<td>{{ driver.group }}</td>
 							<td>{{ driver.club }}</td>

@@ -129,6 +129,45 @@ button {
 	cursor: pointer;
 }
 
+table {
+	table-layout: fixed;
+	border-collapse: collapse;
+	background-color: #fff;
+	width: 100%;
+	margin-bottom: 50px;
+
+	thead th {
+		text-align: center;
+		border: 1px solid $borderColor;
+		font-weight: 700;
+		height: 40px;
+
+		&.number {
+			width: 70px;
+		}
+	}
+
+	tbody td {
+		text-align: center;
+		border: 1px solid $borderColor;
+
+		&.number {
+			font-weight: 700;
+
+			input {
+				text-align: center;
+			}
+		}
+
+		input {
+			width: 100%;
+			border: none;
+		}
+	}
+
+
+}
+
 .form-group {
 	margin-bottom: 15px;
 	display: block;
@@ -169,75 +208,24 @@ button {
 		@include row;
 	}
 
-	.drivers {
-		@include row;
+	.driver {
 
-		.driver {
-			width: 100%;
-			display: block;
-			@include clear;
+		.number {
+		}
 
-			input {
-				float: left;
+		.group {
+		}
 
-				&[name="number"] {
-					width: 55px;
-					text-align: center;
-				}
+		.club {
+		}
 
-				&[name="group"] {
-					width: 55px;
-					text-align: center;
-				}
-
-				&[name="club"] {
-					width: 150px;
-				}
-
-				&[name="name"] {
-					width: calc(100% - 55px - 55px - 150px);
-				}
-			}
+		.name {
 		}
 	}
 }
 
 .preview {
 	@include row;
-
-	table.race, table.drivers {
-		table-layout: fixed;
-		border-collapse: collapse;
-		background-color: #fff;
-		width: 100%;
-		margin-bottom: 50px;
-
-		thead tr {
-
-			th {
-				text-align: center;
-				border: 1px solid $borderColor;
-				font-weight: 700;
-				height: 40px;
-
-				&:first-child {
-					width: 70px;
-				}
-			}
-		}
-
-		tbody tr {
-			
-			td {
-				text-align: center;
-				border: 1px solid $borderColor;
-
-				&:first-child {
-					font-weight: 700;
-				}
-			}
-		}
-	}
 }
 
 @media print {
