@@ -2,7 +2,7 @@ var RaceMatch = require('./lib/RaceMatch.js');
 var RaceDriver = require('./lib/RaceDriver.js');
 var Vue = require('vue');
 
-Vue.config.debug = true;
+Vue.config.debug = false;
 
 var myApp = new Vue({
 
