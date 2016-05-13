@@ -7,105 +7,91 @@
 </head>
 <body id="app">
 	<header>
-			<div class="title">Speedway Match System</div>
+		<div class="title">Speedway Match System</div>
+		<div class="controls">
+			<div class="numDrivers">
+				<span class="count">{{ drivers.length }}</span>
+				<button class="remove" v-on:click="removeDriver">-</button>
+				<button class="add" v-on:click="addDriver">+</button>
+			</div>
+			<button v-on:click="shuffleHeats" style="margin-right: 5px;">Shuffle</button>
+			<button v-on:click="print">Print</button>
 		</div>
 	</header>
+
 	<main>
-		<div class="split">
-			<div class="matchSettings">
-				<div class="settings">
-					<div class="form-group">
-						<label for="numDrivers">Antal Kører</label>
-						<div class="input-group">
-							<input id="numDrivers" class="form-control" number v-model="numDrivers" v-on:keyup.enter="setDrivers">
-							<span><button v-on:click="setDrivers">Update</button></span>
-						</div>
-					</div>
-					
-					
-					<button v-on:click="shuffleHeats">Shuffle</button>
-					<button onclick="window.print();">Print</button>
-					<button v-on:click="resetDrivers">Reset Drivers</button>
-				</div>
 
-				<div class="drivers">
-					<table>
-						<thead>
-							<tr>
-								<th class="number">Nr.</th>
-								<th>Navn</th>
-								<th>Klasse</th>
-								<th>Klub</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="driver" v-for="driver in drivers">
-								<td class="number"><input v-model="driver.number"></td>
-								<td class="name"><input v-model="driver.name"></td>
-								<td class="group"><input v-model="driver.group"></td>
-								<td class="club"><input v-model="driver.club"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-
+		<div class="inputs">
+			<table>
+				<thead>
+					<tr>
+						<th class="number">Nr.</th>
+						<th>Navn</th>
+						<th>Klasse</th>
+						<th>Klub</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="driver" v-for="driver in drivers">
+						<td class="number"><input v-model="driver.number"></td>
+						<td class="name"><input v-model="driver.name"></td>
+						<td class="group"><input v-model="driver.group"></td>
+						<td class="club"><input v-model="driver.club"></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 
-		<div class="split">
-			<div class="preview">
-				<table class="race">
-					<thead>
-						<tr>
-							<th class="number">Heat</th>
-							<th>Lane 1<br>(red)</th>
-							<th>Lane 2<br>(blue)</th>
-							<th>Lane 3<br>(white)</th>
-							<th>Lane 4<br>(yellow)</th>
-							<th>Results</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="heat in heats">
-							<td class="number">{{ $index+1 }}</td>
-							<td v-for="driver in heats[$index]">{{ getDriverNumber(driver) }}</td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<table class="drivers">
-					<thead>
-						<tr>
-							<th class="number">Nr.</th>
-							<th>Navn</th>
-							<th>Klasse</th>
-							<th>Klub</th>
-							<th>1</th>
-							<th>2</th>
-							<th>3</th>
-							<th>4</th>
-							<th>ialt</th>
-							<th>plac.</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="driver in drivers" v-if="driver.isset()">
-							<td class="number">{{ driver.number }}</td>
-							<td>{{ driver.name }}</td>
-							<td>{{ driver.group }}</td>
-							<td>{{ driver.club }}</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		<div class="preview">
+			<table class="race">
+				<thead>
+					<tr>
+						<th class="number">Heat</th>
+						<th>Drivers</th>
+						<th>Results</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="heat in heats">
+						<td class="number">{{ $index+1 }}</td>
+						<td>{{ getHeatDrivers($index) }}</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<table class="drivers">
+				<thead>
+					<tr>
+						<th class="number">Nr.</th>
+						<th>Navn</th>
+						<th class="level">Klasse</th>
+						<th class="club">Klub</th>
+						<th class="small-number">1</th>
+						<th class="small-number">2</th>
+						<th class="small-number">3</th>
+						<th class="small-number">4</th>
+						<th class="number">ialt</th>
+						<th class="number">plac.</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="driver in drivers" v-if="driver.isset()">
+						<td class="number">{{ driver.number }}</td>
+						<td class="text">{{ driver.name }}</td>
+						<td>{{ driver.group }}</td>
+						<td class="text">{{ driver.club }}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
+
 	</main>
 	<script src="public/main.js"></script>
 </body>

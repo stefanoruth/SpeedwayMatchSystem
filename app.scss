@@ -12,31 +12,6 @@ $borderColor: #d4d4d4;
 	}
 }
 
-@mixin column($fraction, $columns, $gutter) {
-	$space: $gutter - $gutter * ($fraction/$columns);
-	width: calc(99.99% * #{$fraction}/#{$columns} - #{$space});
-	float: left;
-	margin-right: #{$gutter};
-	clear: none;
-	display: block;
-	@include clear;
-
-	&:last-child,
-	&:nth-child(#{$columns}n){
-		margin-right: 0px;
-	}
-	&:nth-child(#{$columns}n+1){
-		clear:left
-	}
-}
-
-@mixin row {
-	width: 100%;
-	display: block;
-	margin-bottom: 50px;
-	@include clear;
-}
-
 * {
 	margin: 0px;
 	border: 0px;
@@ -51,13 +26,23 @@ html, body {
 	font-weight: 400;
 	color: $textColor;
 	background-color: $backgroundColor;
-	font-family: 'Open Sans', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+	display: block;
+	width: 100%;
+	max-width: 1100px;
+	margin: 0px auto 100px auto;
+	padding: 50px 20px 0px 20px;
+	@include clear;
 }
 
 header {
 	display: block;
 	width: 100%;
 	height: 60px;
+	padding: 0px 20px;
 	background-color: $mainColor;
 	color: rgba(255, 255, 255, 0.9);
 	@include clear;
@@ -69,72 +54,64 @@ header {
 		display: block;
 		float: left;
 	}
-}
 
-main {
-	display: block;
-	width: 100%;
-	margin-bottom: 100px;
-	padding-top: 50px;
-	@include clear;
-}
+	.controls {
+		display: block;
+		float: right;
+		height: 100%;
+		@include clear;
 
-.row {
-	width: 100%;
-	display: block;
-	@include clear;
-}
+		.numDrivers {
+			display: block;
+			float: left;
+			margin-right: 5px;
+			@include clear;
 
-.content {
-	width: 100%;
-	display: block;
-	max-width: 1220px;
-	margin: 0 auto;
-	padding: 0px 20px;
-	@include clear;
-}
+			.count {
+				display: block;
+				float: left;
+			}
 
-.split {
-	width: 50%;
-	display: block;
-	float: left;
-	padding: 0px 20px;
-	@include clear;
-}
+			.remove,
+			.add {
+				border-radius: 100%;
+				display: block;
+				background-color: rgb(221, 221, 221);
+				width: 30px;
+				height: 30px;
+				text-align: center;
+				line-height: 28px;
+				padding: 0px;
+				float: left;
+				color: #000;
+			}
 
-label {
-	margin-bottom: 5px;
-	display: block;
-}
+			.remove {
 
-input {
-	display: block;
-	padding: 0px 12px;
-	height: 32px;
-	line-height: 32px;
-	border: 1px solid #ccc;
-	background-color: #fff;
-	color: #55595c;
-	font-size: 16px;
+			}
 
-	&.form-control {
-		width: 100%;
+			.add {
+			}
+		}
+
+		button {
+			height: 32px;
+			padding: 0px 12px;
+			border: 1px solid #ccc;
+			cursor: pointer;
+			float: left;
+			display: block;
+		}
 	}
 }
 
-button {
-	height: 32px;
-	padding: 0px 12px;
-	border: 1px solid #ccc;
-	cursor: pointer;
-}
+
 
 table {
 	table-layout: fixed;
 	border-collapse: collapse;
 	background-color: #fff;
 	width: 100%;
-	margin-bottom: 50px;
 
 	thead th {
 		text-align: center;
@@ -143,13 +120,26 @@ table {
 		height: 40px;
 
 		&.number {
-			width: 70px;
+			width: 45px;
+		}
+
+		&.small-number {
+			width: 30px;
+		}
+
+		&.club {
+			width: 120px;
+		}
+
+		&.level {
+			width: 80px;
 		}
 	}
 
 	tbody td {
 		text-align: center;
 		border: 1px solid $borderColor;
+		padding: 3px;
 
 		&.number {
 			font-weight: 700;
@@ -159,75 +149,67 @@ table {
 			}
 		}
 
+		&.text {
+			text-align: left;
+			padding-left: 12px;
+		}
+
 		input {
 			width: 100%;
 			border: none;
+			display: block;
+			padding: 0px 12px;
+			height: 32px;
+			line-height: 32px;
+			background-color: #fff;
+			color: #55595c;
+			font-size: 16px;
 		}
 	}
-
-
 }
 
-.form-group {
-	margin-bottom: 15px;
+.inputs {
 	display: block;
-
-	.input-group {
-		position: relative;
-		display: table;
-		border-collapse: separate;
-		width: 100%;
-
-		input {
-			display: table-cell;
-		}
-
-		span {
-			display: table-cell;
-			vertical-align: middle;
-			width: 1%;
-		}
-	}
-}
-
-.card {
-
-	.header {
-		
-
-		.title {
-
-		}
-	}
-}
-
-.matchSettings {
-	@include row;
-
-	.settings {
-		@include row;
-	}
-
-	.driver {
-
-		.number {
-		}
-
-		.group {
-		}
-
-		.club {
-		}
-
-		.name {
-		}
-	}
+	width: 100%;
+	padding-bottom: 50px;
+	border-bottom: 2px solid $borderColor;
+	margin-bottom: 50px;
 }
 
 .preview {
-	@include row;
+	display: block;
+	width: 100%;
+	@include clear;
+
+	.race {
+		width: 28%;
+		margin-right: 2%;
+		float: left;
+	}
+
+	.drivers {
+		width: 70%;
+		float: left;
+	}
 }
 
 @media print {
-	// Reset Design
+	header,
+	.inputs,
+	.tabs {
+		display: none;
+	}
+
+	body {
+		font-size: 11pt;
+	}
+
+	main {
+		padding: 0px;
+	}
+
+	@page {
+		margin: 5mm;
+		size: landscape;
+	}
 }
