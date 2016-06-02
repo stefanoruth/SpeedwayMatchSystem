@@ -54,7 +54,7 @@
 				<tbody>
 					<tr v-for="heat in heats">
 						<td class="number">{{ $index+1 }}</td>
-						<td>{{ getHeatDrivers($index) }}</td>
+						<td>{{ raceOb.getHeatDrivers($index, false) }}</td>
 						<td></td>
 					</tr>
 				</tbody>

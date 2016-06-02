@@ -1,5 +1,6 @@
 var RaceMatch = require('./lib/RaceMatch.js');
 var RaceDriver = require('./lib/RaceDriver.js');
+var RaceEvent = require('./lib/RaceEvent.js');
 var Vue = require('vue');
 
 Vue.config.debug = true;
@@ -11,6 +12,7 @@ var myApp = new Vue({
 	data: {
 		heats: [],
 		drivers: [],
+		raceOb: null,
 	},
 
 	ready: function() {
@@ -21,8 +23,8 @@ var myApp = new Vue({
 	methods: {
 
 		race: function() {
-			var race = new RaceMatch();
-			this.heats = race.setDrivers(this.drivers.length).race();
+			this.raceOb = new RaceMatch();
+			this.heats = this.raceOb.setDrivers(this.drivers).race();
 		},
 
 		shuffleHeats: function(){
@@ -63,31 +65,6 @@ var myApp = new Vue({
 				return this.drivers[id-1];
 			}
 			return;
-		},
-
-		getHeatDrivers: function(heatId) {
-			var heat = this.heats[heatId];
-			if (heat == null) {
-				return;
-			}
-			var heatDrivers = [
-				this.getDriver(heat[0]),
-				this.getDriver(heat[1]),
-				this.getDriver(heat[2]),
-				this.getDriver(heat[3]),
-			];
-
-			var string = '';
-			for (var i = heatDrivers.length - 1; i >= 0; i--) {
-
-				if (heatDrivers[i].number != null) {
-					string += heatDrivers[i].number;
-				}
-				if (i != 0) {
-					string += ' - ';
-				}
-			}
-			return string;
 		},
 
 		print: function() {
