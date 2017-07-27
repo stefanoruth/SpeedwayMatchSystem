@@ -37,7 +37,7 @@
 						<tr v-for="driver in drivers">
 							<td><input v-model="driver.number"></td>
 							<td><input v-model="driver.name"></td>
-							<td><input v-model="driver.group"></td>
+							<td><input v-model="driver.group" v-on:blur="race()"></td>
 							<td><input v-model="driver.club"></td>
 						</tr>
 					</tbody>
