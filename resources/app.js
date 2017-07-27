@@ -3,24 +3,29 @@ var RaceDriver = require('../src/RaceDriver.js');
 var RaceEvent = require('../src/RaceEvent.js');
 var Vue = require('vue');
 
-Vue.config.debug = true;
+Vue.config.productionTip = false;
 
-var myApp = new Vue({
+new Vue({
 
 	el: '#app',
 
 	data: {
+		mobileMenu: false,
 		heats: [],
 		drivers: [],
 		raceOb: null,
 	},
 
-	ready: function() {
+	mounted: function() {
 		this.setDrivers(8);
 		this.race();
 	},
 
 	methods: {
+
+		mobileMenuToggle: function(){
+			this.mobileMenu = !this.mobileMenu;
+		},
 
 		race: function() {
 			this.raceOb = new RaceMatch();

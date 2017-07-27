@@ -229,24 +229,29 @@ var RaceDriver = __webpack_require__(1);
 var RaceEvent = __webpack_require__(4);
 var Vue = __webpack_require__(5);
 
-Vue.config.debug = true;
+Vue.config.productionTip = false;
 
-var myApp = new Vue({
+new Vue({
 
 	el: '#app',
 
 	data: {
+		mobileMenu: false,
 		heats: [],
 		drivers: [],
 		raceOb: null
 	},
 
-	ready: function ready() {
+	mounted: function mounted() {
 		this.setDrivers(8);
 		this.race();
 	},
 
 	methods: {
+
+		mobileMenuToggle: function mobileMenuToggle() {
+			this.mobileMenu = !this.mobileMenu;
+		},
 
 		race: function race() {
 			this.raceOb = new RaceMatch();

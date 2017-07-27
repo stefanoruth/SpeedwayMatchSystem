@@ -5,94 +5,123 @@
 	<title>Speedway Match System</title>
 	<link rel="stylesheet" href="app.css">
 </head>
-<body id="app">
-	<header>
-		<div class="title">Speedway Match System</div>
-		<div class="controls">
-			<div class="numDrivers">
-				<span class="count">{{ drivers.length }}</span>
-				<button class="remove" v-on:click="removeDriver">-</button>
-				<button class="add" v-on:click="addDriver">+</button>
+<body>
+	<div id="app">
+		<nav class="navbar">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="#">
+					<img src="http://bulma.io/images/bulma-logo.png" width="112" height="28">
+				</a>
+
+				<div class="navbar-burger" :class="{'is-active': mobileMenu}" v-on:click="mobileMenuToggle">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
 			</div>
-			<button v-on:click="shuffleHeats" style="margin-right: 5px;">Shuffle</button>
-			<button v-on:click="print">Print</button>
-		</div>
-	</header>
 
-	<main>
+			<div class="navbar-menu" :class="{'is-active': mobileMenu}">
+				<div class="navbar-end">
+					<div class="navbar-item">{{ drivers.length }}</div>
+					<a class="navbar-item" href="#" v-on:click="addDriver">Add</a>
+					<a class="navbar-item" href="#" v-on:click="removeDriver">Remove</a>
+					<a class="navbar-item" href="#" v-on:click="shuffleHeats">Suffle</a>
+					<a class="navbar-item" href="#" v-on:click="print">Print</a>
+				</div>
+			</div>
+		</nav>
+		<main>
+			<section class="section">
+				<div class="container">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Nr.</th>
+								<th>Navn</th>
+								<th>Klasse</th>
+								<th>Klub</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="driver in drivers">
+								<td><input v-model="driver.number"></td>
+								<td><input v-model="driver.name"></td>
+								<td><input v-model="driver.group"></td>
+								<td><input v-model="driver.club"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
 
-		<div class="inputs">
-			<table>
-				<thead>
-					<tr>
-						<th class="number">Nr.</th>
-						<th>Navn</th>
-						<th>Klasse</th>
-						<th>Klub</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="driver" v-for="driver in drivers">
-						<td class="number"><input v-model="driver.number"></td>
-						<td class="name"><input v-model="driver.name"></td>
-						<td class="group"><input v-model="driver.group"></td>
-						<td class="club"><input v-model="driver.club"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<div class="preview">
-			<table class="race">
-				<thead>
-					<tr>
-						<th class="number">Heat</th>
-						<th>Drivers</th>
-						<th>Results</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="heat in heats">
-						<td class="number">{{ $index+1 }}</td>
-						<td>{{ raceOb.getHeatDrivers($index, false) }}</td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
+			<section class="hero is-primary">
+				<div class="hero-body">
+					<div class="container">
+						<h1 class="title">Preview</h1>
+						<h2 class="subtitle">See how the race is going to be run.</h2>
+					</div>
+				</div>
+			</section>
 			
-			<table class="drivers">
-				<thead>
-					<tr>
-						<th class="number">Nr.</th>
-						<th>Navn</th>
-						<th class="level">Klasse</th>
-						<th class="club">Klub</th>
-						<th class="small-number">1</th>
-						<th class="small-number">2</th>
-						<th class="small-number">3</th>
-						<th class="small-number">4</th>
-						<th class="number">ialt</th>
-						<th class="number">plac.</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="driver in drivers" v-if="driver.isset()">
-						<td class="number">{{ driver.number }}</td>
-						<td class="text">{{ driver.name }}</td>
-						<td>{{ driver.group }}</td>
-						<td class="text">{{ driver.club }}</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+			<section id="preview" class="section">
+				<div class="container">
+					<div class="columns">
+						<div class="column">
+							<table class="table is-narrow">
+								<thead>
+									<tr>
+										<th>Nr.</th>
+										<th>Navn</th>
+										<th>Klasse</th>
+										<th>Klub</th>
+										<th>1</th>
+										<th>2</th>
+										<th>3</th>
+										<th>4</th>
+										<th>ialt</th>
+										<th>plac.</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="driver in drivers" v-if="driver.isset()">
+										<td>{{ driver.number }}</td>
+										<td>{{ driver.name }}</td>
+										<td>{{ driver.group }}</td>
+										<td>{{ driver.club }}</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 
-	</main>
+						<div class="column is-3">
+							<table class="table is-narrow">
+								<thead>
+									<tr>
+										<th>Heat</th>
+										<th>Drivers</th>
+										<th>Results</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="(heat, i) in heats">
+										<td>{{ i+1 }}</td>
+										<td>{{ raceOb.getHeatDrivers(i, false) }}</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
 	<script src="app.js"></script>
 </body>
 </html>
