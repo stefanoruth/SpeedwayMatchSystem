@@ -1,1 +1,33 @@
 @import "node_modules/bulma/bulma";
+
+@media print {
+	html {
+		font-size: 14px;
+	}
+
+	section:not(#preview) {
+		display: none;
+		padding: 0px;
+
+		.container {
+			width: 100%;
+			max-width: none;
+		}
+	}
+
+	.table {
+		td, th {
+			border-width: 1px;
+		}
+		
+		tbody tr:last-child td,
+		tbody tr:last-child th {
+			border-bottom-width: 1px;
+		}
+	}
+
+	@page {
+		margin: 5mm;
+		size: landscape;
+	}
+}

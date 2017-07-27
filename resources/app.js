@@ -3,6 +3,7 @@ var RaceDriver = require('../src/RaceDriver.js');
 var RaceEvent = require('../src/RaceEvent.js');
 var Vue = require('vue');
 
+window._ = require('lodash');
 Vue.config.productionTip = false;
 
 new Vue({
@@ -16,9 +17,14 @@ new Vue({
 		raceOb: null,
 	},
 
+	computed: {
+		sortedDrivers: function(){
+			return _.chain(this.drivers).orderBy('number').groupBy('group').sort().value();
+		}
+	},
+
 	mounted: function() {
-		this.setDrivers(8);
-		this.race();
+		this.clearDrivers();
 	},
 
 	methods: {
@@ -42,18 +48,8 @@ new Vue({
 			this.heats.__ob__.dep.notify();
 		},
 
-		setDrivers: function(count) {
-			this.drivers.length = 0;
-
-			for (var i = count - 1; i >= 0; i--) {
-				this.drivers.push(new RaceDriver(i, 'John Christiansen', '4B', 'Tommerup'));
-			};
-
-			this.race();
-		},
-
 		addDriver: function() {
-			this.drivers.push(new RaceDriver());
+			this.drivers.push(new RaceDriver);
 			this.race();
 		},
 
@@ -62,6 +58,33 @@ new Vue({
 				return;
 			}
 			this.drivers.pop();
+			this.race();
+		},
+
+		clearDrivers: function() {
+			this.drivers.length = 0;
+
+			for (var i = 0; i < 4; i++) {
+				this.drivers.push(new RaceDriver);
+			}
+
+			this.race();
+		},
+
+		exampleData: function() {
+			this.drivers.length = 0;
+
+			this.drivers.push(new RaceDriver(30, 'John Doe', '4A', 'OKM'));
+			this.drivers.push(new RaceDriver(31, 'John Doe', '4A', 'Munkebo'));
+			this.drivers.push(new RaceDriver(50, 'John Doe', '4B', 'Tommerup'));
+			this.drivers.push(new RaceDriver(51, 'John Doe', '4B', 'Sanderum'));
+			this.drivers.push(new RaceDriver(60, 'John Doe', '5A', 'Næsby'));
+			this.drivers.push(new RaceDriver(61, 'John Doe', '5A', 'OKM'));
+			this.drivers.push(new RaceDriver(90, 'John Doe', '5B', 'Munkebo'));
+			this.drivers.push(new RaceDriver(91, 'John Doe', '5B', 'Sanderum'));
+			this.drivers.push(new RaceDriver(92, 'John Doe', '5B', 'Næsby'));
+			this.drivers.push(new RaceDriver(100, 'John Longname Doe', '6A', 'OKM'));
+
 			this.race();
 		},
 
