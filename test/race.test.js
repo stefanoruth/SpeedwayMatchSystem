@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
 var chai = require('chai');
-var RaceMatch = require('../lib/RaceMatch.js');
-var RaceEvent = require('../lib/RaceEvent.js');
-var RaceDriver = require('../lib/RaceDriver.js');
+var RaceMatch = require('../src/RaceMatch.js');
+var RaceEvent = require('../src/RaceEvent.js');
+var RaceDriver = require('../src/RaceDriver.js');
 
 describe('Speedway Test Race', function(){
 
