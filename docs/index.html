@@ -53,6 +53,7 @@
 					<div class="block">
 						<a href="#" class="button is-white" v-on:click.prevent="shuffleHeats">Suffle</a>
 						<a href="#" class="button is-white" v-on:click.prevent="print">Print</a>
+						<a href="#" class="button is-white" v-on:click.prevent="race">Race</a>
 					</div>
 				</div>
 			</div>
@@ -67,7 +68,6 @@
 								<tr>
 									<th>Nr.</th>
 									<th>Navn</th>
-									<th>Klasse</th>
 									<th>Klub</th>
 									<th>1</th>
 									<th>2</th>
@@ -85,7 +85,6 @@
 									<tr v-for="driver in drivers" v-if="driver.isset()">
 										<td>{{ driver.number }}</td>
 										<td>{{ driver.name }}</td>
-										<td>{{ driver.group }}</td>
 										<td>{{ driver.club }}</td>
 										<td></td>
 										<td></td>
@@ -100,7 +99,7 @@
 						</table>
 					</div>
 
-					<div class="column is-4">
+					<div class="column is-5">
 						<table class="table is-narrow">
 							<thead>
 								<tr>
@@ -110,11 +109,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(heat, i) in heats">
-									<td>{{ i+1 }}</td>
-									<td>{{ raceOb.getHeatDrivers(i, false) }}</td>
-									<td></td>
-								</tr>
+								<template v-if="raceEvent != null">
+									<tr v-for="(item, i) in raceEvent.heats" :group="item.group" :round="item.round">
+										<td>{{ i+1 }}</td>
+										<td>{{ heatDrivers(item.group, item.round) }}</td>
+										<td></td>
+									</tr>
+								</template>
 							</tbody>
 						</table>
 					</div>

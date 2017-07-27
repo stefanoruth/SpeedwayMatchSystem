@@ -1,74 +1,46 @@
 var RaceMatch = require('./RaceMatch.js');
+var _ = require('lodash');
 
 module.exports = function(drivers) {
 	this.drivers = drivers || [];
-	this.groups = {};
-	this.groupMatches = {};
-	this.groupHeats = {};
+	this.matches = {};
+	this.heats = [];
 
-	this.runRaces = function() {
-		this.splitRacers();
-		//console.log(this.groups);
+	this.run = function(display) {
+		var display = display != false ? true : false;
+		var groups = _.chain(this.drivers).groupBy('group').sort().value();
 
-		for (var key in this.groups) {
+		for (var key in groups) {
 			var match = new RaceMatch(key);
-			match.setDrivers(this.groups[key]);
+			match.setDrivers(groups[key]);
 			match.race();
-			
-			this.groupHeats[key] = match.heats;
-			this.groupMatches[key] = match;
 
+			this.matches[key] = match;
 		}
 
-		var finalEvent = [];
+		var heats = [];
 		var longest = 0;
 
-		for (var i in this.groupHeats) {
-			if (this.groupHeats[i].length > longest) {
-				longest = this.groupHeats[i].length;
+		for (var i in this.matches) {
+			if (this.matches[i].heats.length > longest) {
+				longest = this.matches[i].heats.length;
 			}
 		}
 
-		//console.log(longest);
 		for (var i = 0; i < longest; i++) {
 			
-			for (var key in this.groupHeats) {
-				if (typeof this.groupHeats[key][i] === 'undefined') {
+			for (var key in this.matches) {
+				if (typeof this.matches[key].heats[i] === 'undefined') {
 					continue;
 				}
-				//console.log(this.groupMatches[key].getHeatDrivers(i, true));
-				finalEvent.push({
-					heat: key+'-'+(i+1),
-					drivers: this.groupMatches[key].getHeatDrivers(i, false),
+
+				this.heats.push({
+					group: key,
+					round: i+1,
 				});
-				// finalEvent[key+"-"+(i+1)] = [
-				// 	this.groupHeats[key][i],
-				// 	this.groupMatches[key].getHeatDrivers(i, true),
-				// 	this.groupMatches[key].getHeatDrivers(i, false),
-				// ];
 			}
 		}
-		
-		//console.log(this.groupMatches);
-		//console.log(this.groupHeats);
-		//console.log(finalEvent);
 
-		return finalEvent;
-	}
-
-	this.splitRacers = function() {
-		var groups = {};
-
-		this.drivers.forEach(function(driver){
-			if (typeof groups[driver.group] === 'undefined') {
-				groups[driver.group] = [];
-			}
-
-			groups[driver.group].push(driver);
-			//console.log('pushes driver '+driver.number+' to group '+driver.group);
-		})
-
-
-		this.groups = groups;
+		return this.heats;
 	}
 }

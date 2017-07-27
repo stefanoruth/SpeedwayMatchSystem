@@ -7,14 +7,11 @@ window._ = require('lodash');
 Vue.config.productionTip = false;
 
 new Vue({
-
 	el: '#app',
 
 	data: {
-		mobileMenu: false,
-		heats: [],
 		drivers: [],
-		raceOb: null,
+		raceEvent: null,
 	},
 
 	computed: {
@@ -24,18 +21,15 @@ new Vue({
 	},
 
 	mounted: function() {
-		this.clearDrivers();
+		this.exampleData();
 	},
 
 	methods: {
 
-		mobileMenuToggle: function(){
-			this.mobileMenu = !this.mobileMenu;
-		},
-
 		race: function() {
-			this.raceOb = new RaceMatch();
-			this.heats = this.raceOb.setDrivers(this.drivers).race();
+			var event = (new RaceEvent(this.drivers));
+			event.run(false);
+			this.raceEvent = event;
 		},
 
 		shuffleHeats: function(){
@@ -44,8 +38,8 @@ new Vue({
 				return o;
 			};
 
-			Shuffle(this.heats);
-			this.heats.__ob__.dep.notify();
+			Shuffle(this.raceEvent.heats);
+			this.raceEvent.heats.__ob__.dep.notify();
 		},
 
 		addDriver: function() {
@@ -95,8 +89,20 @@ new Vue({
 			return;
 		},
 
+		heatDrivers: function(group, round) {
+			var drivers = this.raceEvent.matches[group].getHeatDrivers(round-1);
+
+			for (var i = drivers.length - 1; i >= 0; i--) {
+				if (drivers[i] == '') {
+					drivers[i] = '@';
+				}
+			}
+
+			return drivers.join(' - ');
+		},
+
 		print: function() {
 			window.print();
-		}
+		},
 	},
 });

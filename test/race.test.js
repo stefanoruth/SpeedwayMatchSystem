@@ -8,6 +8,24 @@ describe('Speedway Test Race', function(){
 
 	describe('Build all races', function(){
 
+		it('should run a 2 persons race', function(){
+			var match = new RaceMatch;
+			match.setDrivers([
+				new RaceDriver,
+				new RaceDriver,
+			]);
+
+
+			expect(match.drivers).to.have.length(4);
+
+			expect(match.race()).eql([
+				[1,4,2,3],
+				[2,1,3,4],
+				[3,2,4,1],
+				[4,3,1,2],
+			]);
+		});
+
 		it('should run a 4 persons race', function(){
 			var match = new RaceMatch();
 			
@@ -340,66 +358,39 @@ describe('Speedway Test Race', function(){
 		expect(match.drivers).to.have.length(4);
 	})
 
-	it('should tests multiple race groups', function(){
-		var drivers = [
-			new RaceDriver(11, 'John Doe', 'K1', 'Tommerup'),
-			new RaceDriver(12, 'Jane Doe', 'K1', 'Nesby'),
-			new RaceDriver(13, 'John Doe', 'K1', 'OKM'),
-			new RaceDriver(14, 'John Doe', 'K1', 'Tommerup'),
+	describe('Run race event', function(){
 
-			new RaceDriver(21, 'John Doe', 'K2', 'OKM'),
-			new RaceDriver(22, 'John Doe', 'K2', 'Sanderum'),
-			new RaceDriver(23, 'John Doe', 'K2', 'Sanderum'),
+		it('checks when each group should run', function(){
+			var drivers = [
+				new RaceDriver(11, 'John Doe', 'K1', 'Tommerup'),
+				new RaceDriver(12, 'Jane Doe', 'K1', 'Nesby'),
+				new RaceDriver(13, 'John Doe', 'K1', 'OKM'),
+				new RaceDriver(14, 'John Doe', 'K1', 'Tommerup'),
+				new RaceDriver(15, 'John Doe', 'K1', 'OKM'),
 
-			new RaceDriver(31, 'John Doe', 'K3', 'Sanderum'),
-			new RaceDriver(32, 'John Doe', 'K3', 'Nesby'),
+				new RaceDriver(21, 'John Doe', 'K2', 'OKM'),
+				new RaceDriver(22, 'John Doe', 'K2', 'Sanderum'),
+				new RaceDriver(23, 'John Doe', 'K2', 'Sanderum'),
 
-			new RaceDriver(41, 'John Doe', '4B', 'OKM'),
-		];
+				new RaceDriver(30, 'John Doe', 'K3', 'Sanderum'),
+			];
 
-		var event = new RaceEvent(drivers);
-		event.splitRacers();
-
-		expect(drivers).to.have.length(10);
-		expect(Object.keys(event.groups)).to.have.length(4);
-		expect(event.groups['K1']).to.have.length(4);
-		expect(event.groups['K2']).to.have.length(3);
-		expect(event.groups['K3']).to.have.length(2);
-		expect(event.groups['4B']).to.have.length(1);
-	});
-
-	it('run an entire race event', function(){
-		var drivers = [
-			new RaceDriver(11, 'John Doe', 'K1', 'Tommerup'),
-			new RaceDriver(12, 'Jane Doe', 'K1', 'Nesby'),
-			new RaceDriver(13, 'John Doe', 'K1', 'OKM'),
-			new RaceDriver(14, 'John Doe', 'K1', 'Tommerup'),
-
-			new RaceDriver(21, 'John Doe', 'K2', 'OKM'),
-			new RaceDriver(22, 'John Doe', 'K2', 'Sanderum'),
-			new RaceDriver(23, 'John Doe', 'K2', 'Sanderum'),
-
-			new RaceDriver(31, 'John Doe', 'K3', 'Sanderum'),
-			new RaceDriver(32, 'John Doe', 'K3', 'Nesby'),
-
-			new RaceDriver(41, 'John Doe', '4B', 'OKM'),
-		];
-
-		var result = [
-			{ heat: 'K1-1', drivers: '11 - 14 - 12 - 13'},
-			{ heat: 'K2-1', drivers: '21 - 23 -   - 22'},
-			{ heat: 'K3-1', drivers: '31 - 32 -   -  '},
-			{ heat: '4B-1', drivers: '41 -   -   -  '},
-			{ heat: 'K1-2', drivers: '12 - 11 - 13 - 14'},
-			{ heat: 'K2-2', drivers: '22 - 21 -   - 23'},
-			{ heat: 'K3-2', drivers: '32 - 31 -   -  '},
-			{ heat: 'K1-3', drivers: '13 - 12 - 14 - 11'},
-			{ heat: 'K2-3', drivers: '23 - 22 -   - 21'},
-			{ heat: 'K1-4', drivers: '14 - 13 - 11 - 12'},
-		];
-
-		var event = new RaceEvent(drivers);
-		expect(event.runRaces()).eql(result);
+			expect((new RaceEvent(drivers)).run()).eql([
+				{ group: 'K1', round: 1 },
+				{ group: 'K2', round: 1 },
+				{ group: 'K3', round: 1 },
+				{ group: 'K1', round: 2 },
+				{ group: 'K2', round: 2 },
+				{ group: 'K3', round: 2 },
+				{ group: 'K1', round: 3 },
+				{ group: 'K2', round: 3 },
+				{ group: 'K3', round: 3 },
+				{ group: 'K1', round: 4 },
+				{ group: 'K2', round: 4 },
+				{ group: 'K3', round: 4 },
+				{ group: 'K1', round: 5 },
+  			]);
+		});
 	});
 
 	it('checks the heat display values', function(){
@@ -409,7 +400,7 @@ describe('Speedway Test Race', function(){
 			new RaceDriver(11, 'John Doe'),
 			new RaceDriver(22, 'Jane Doe'),
 			new RaceDriver(44, 'Søren Sørensen'),
-			new RaceDriver(33, 'Anders Andersen'),
+			new RaceDriver('33a', 'Anders Andersen'),
 		]);
 
 		expect(race.drivers).to.have.length(4);
@@ -420,7 +411,6 @@ describe('Speedway Test Race', function(){
 			[4,3,1,2],
 		]);
 
-		expect(race.getHeatDrivers(0, false)).eql('11 - 33 - 22 - 44');
-		expect(race.getHeatDrivers(0, true)).eql('1 - 4 - 2 - 3');
+		expect(race.getHeatDrivers(0)).eql([11,'33a',22,44]);
 	});
 });

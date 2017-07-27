@@ -13,6 +13,11 @@ module.exports = function(group) {
 				this.drivers[i] = new RaceDriver(i);
 			}
 		} else if (typeof drivers === 'object') {
+			if (drivers.length < 4) {
+				for (var i = drivers.length; i < 4; i++) {
+					drivers[i] = new RaceDriver;
+				}
+			}
 			this.drivers = drivers;
 		}
 
@@ -37,7 +42,15 @@ module.exports = function(group) {
 					this.heats[heat][3] = driver + 1;
 				}
 			};
+
+			// Replace empty slots.
+			for (var i = 0; i < 4; i++) {
+				if (typeof this.heats[heat][i] === 'undefined') {
+					this.heats[heat][i] = null;
+				}
+			}
 		}
+
 		return this.heats;
 	}
 
@@ -92,34 +105,14 @@ module.exports = function(group) {
 		return;
 	}
 
-	this.getHeatDrivers = function(heatId, display) {
-		if (heatId == null) {
-			return;
-		}
-
-		var number = (typeof display !== 'undefined' && display != false ? true : false);
+	this.getHeatDrivers = function(heatId) {
 		var heat = this.heats[heatId];
-		var heatDrivers = [
-			this.getDriver(heat[0]),
-			this.getDriver(heat[1]),
-			this.getDriver(heat[2]),
-			this.getDriver(heat[3]),
+		
+		return [
+			this.getDriver(heat[0]).number,
+			this.getDriver(heat[1]).number,
+			this.getDriver(heat[2]).number,
+			this.getDriver(heat[3]).number,
 		];
-
-		var list = [];
-		for (var i = 0; i < heatDrivers.length; i++) {
-			if (typeof heatDrivers[i] === 'undefined') {
-				list.push(" ");
-				continue;
-			}
-
-			if (number) {
-				list.push(heatDrivers[i].id);
-			} else if (!number) {
-				list.push(heatDrivers[i].number);
-			}
-		}
-
-		return list.join(' - ');
 	}
 }
