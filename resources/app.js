@@ -21,7 +21,7 @@ new Vue({
 	},
 
 	mounted: function() {
-		this.exampleData();
+		this.clearDrivers();
 	},
 
 	methods: {
