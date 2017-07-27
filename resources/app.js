@@ -1,6 +1,6 @@
-var RaceMatch = require('./lib/RaceMatch.js');
-var RaceDriver = require('./lib/RaceDriver.js');
-var RaceEvent = require('./lib/RaceEvent.js');
+var RaceMatch = require('../src/RaceMatch.js');
+var RaceDriver = require('../src/RaceDriver.js');
+var RaceEvent = require('../src/RaceEvent.js');
 var Vue = require('vue');
 
 Vue.config.debug = true;
