@@ -14,7 +14,7 @@
     "bulma": "^0.7.5",
     "chai": "^4.2.0",
     "cross-env": "^5.2.0",
-    "laravel-mix": "^1.0",
+    "laravel-mix": "^4.0",
     "lodash": "^4.17.11",
     "mocha": "^6.1.4",
     "vue": "^2.6.10"
